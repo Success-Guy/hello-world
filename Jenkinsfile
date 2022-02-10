@@ -32,7 +32,7 @@ pipeline {
 
             sshPut remote: remote, from: 'webapp/target/webapp.war', into: '.'
             sshPut remote: remote, from: 'Dockerfile', into: '.'
-	    sshPut remote: remote, from: 'ansible-playbook.yml, into:'.'
+	    sshPut remote: remote, from: 'ansible-playbook.yml', into:'.'
             //this will only work on the first run, else fail due to duplicate docker name
             //else ansible will be integrated in the next step
             sshCommand remote: remote, command: "mv webapp.war ROOT.war"
