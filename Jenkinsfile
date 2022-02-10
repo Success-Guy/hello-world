@@ -13,7 +13,7 @@ pipeline {
         stage('Building...') {
       steps {
         // Get some code from a GitHub repository
-        git credentialsId: 'github-private-key', url: 'git@github.com:Success-Guy/hello-world.git'
+        git branch: 'ansible', credentialsId: 'github-private-key', url: 'git@github.com:Success-Guy/hello-world.git'
        
       //build maven
       sh 'mvn clean package'
