@@ -2,6 +2,18 @@
 - hosts: all
   become: true
   tasks:
+  - name: stop current running container
+    command: docker stop simple-devops-container
+    ignore_errors: yes
+
+  - name: remove stopped container 
+    command: docker rm simple-devops-container
+    ignore_errors: yes
+
+  - name: remove docker image
+    command: docker rmi tomcat-devops-image 
+    ignore_errors: yes
+
   - name: building docker image
     command: docker build -t tomcat-devops-image .
 
