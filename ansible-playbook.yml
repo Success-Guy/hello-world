@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: building docker image
+    command: docker build -t tomcat-devops-image .
+
+  - name: create container using simple-container-image
+    command: docker run --name simple-devops-container -d -p80:8080 tomcat-devops-image
+
