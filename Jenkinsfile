@@ -13,7 +13,7 @@ pipeline {
         stage('Building...') {
       steps {
         // Get some code from a GitHub repository
-        git branch: 'ansible', credentialsId: 'github-private-key', url: 'git@github.com:Success-Guy/hello-world.git'
+        git branch: 'master', credentialsId: 'github-private-key', url: 'git@github.com:Success-Guy/hello-world.git'
        
       //build maven
       sh 'mvn clean package'
@@ -32,11 +32,13 @@ pipeline {
 
             sshPut remote: remote, from: 'webapp/target/webapp.war', into: '.'
             sshPut remote: remote, from: 'Dockerfile', into: '.'
-	    sshPut remote: remote, from: 'ansible-playbook.yml', into:'.'
+	    sshPut remote: remote, from: 'ansible-build.yml', into:'.'
+            sshPut remote: remote, from: 'ansible-run-docker.yml', into:'.'
             //this will only work on the first run, else fail due to duplicate docker name
             //else ansible will be integrated in the next step
             sshCommand remote: remote, command: "mv webapp.war ROOT.war"
-            sshCommand remote: remote, command: "ansible-playbook -i hosts ansible-playbook.yml"
+            sshCommand remote: remote, command: "ansible-playbook -i hosts ansible-build.yml --limit localhost"
+            sshCommand remote: remote, command: "ansible-playbook -i hosts ansible-run-docker.yml --limit 172.31.42.250"
           }
         }
         echo 'Done succesfully'

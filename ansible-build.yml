@@ -1,0 +1,16 @@
+---
+- hosts: all
+#  become: true
+  tasks:
+  - name: building docker image
+    command: docker build -t tomcat-devops-image:latest .
+
+  - name: create tag for image
+    command: docker tag tomcat-devops-image abiodunsam/tomcat-devops-image
+
+  - name: push image on to docker hub
+    command: docker push abiodunsam/tomcat-devops-image
+
+  - name: remove docker images from ansible server
+    command: docker rmi tomcat-devops-image:latest abiodunsam/tomcat-devops-image
+    ignore_errors: yes
