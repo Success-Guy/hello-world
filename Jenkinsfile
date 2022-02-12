@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_HOST = '3.17.5.181'
+        ANSIBLE_HOST = '172.31.42.214'
     }
 
     tools {
@@ -25,7 +25,7 @@ pipeline {
           withCredentials([usernamePassword(credentialsId: 'ansible-server', passwordVariable: 'pwd', usernameVariable: 'user')]) {
             remote = [:]
             remote.name = "${ user }"
-            remote.host = "${ DOCKER_HOST }"
+            remote.host = "${ ANSIBLE_HOST }"
             remote.user = "${ user }"
             remote.password = "${ pwd }"
             remote.allowAnyHosts = true

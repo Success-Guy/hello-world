@@ -11,12 +11,14 @@
     ignore_errors: yes
 
   - name: remove docker image
-    command: docker rmi tomcat-devops-image 
+    command: docker rmi abiodunsam/tomcat-devops-image:latest
     ignore_errors: yes
 
-  - name: building docker image
-    command: docker build -t tomcat-devops-image .
+#  - name: building docker image
+#    command: docker build -t tomcat-devops-image .
+  
+  - name: pull docker image from docker hub
+    command: docker pull abiodunsam/tomcat-devops-image:latest
 
   - name: create container using simple-container-image
-    command: docker run --name simple-devops-container -d -p80:8080 tomcat-devops-image
-
+    command: docker run --name simple-devops-container -d -p80:8080 abiodunsam/tomcat-devops-image:latest
