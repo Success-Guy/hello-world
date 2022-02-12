@@ -1,8 +1,9 @@
- <h1>My First DevOps Job using  Jenkins Pipeline with Docker</h1>
- <h2>Deploying on Docker container using Jenkins Pipeline</h2>
-
-<h3>Modified Docker file to deploy app on tomcat server root</h3>
+ <h1>DevOps CI/CD Job with Jenkins Pipeline, Ansible and Docker</h1>
+ <h2>Complete automated</h2>
 <h3>All is well, even inside well!</h3>
+Abiodun_Sam
+Feb. 12th, 2022 11:32PM GM+1
+
 <pre>
  FROM tomcat:latest
 
