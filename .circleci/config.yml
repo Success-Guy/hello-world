@@ -30,5 +30,5 @@ workflows:
       - print_world:
           requires: 
             - print_world
-      - print_name
+      # - print_name
 
