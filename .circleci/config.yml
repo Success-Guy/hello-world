@@ -17,11 +17,11 @@ jobs:
     steps:
       - run: "echo World!"
 
-  # print_name:
-  #   docker:
-  #     - image: alpine
-  #   steps:
-  #     - run: "echo << My_Name >>"
+  print_name:
+    docker:
+      - image: alpine
+    steps:
+      - run: "echo << My_Name >>"
 
 workflows:
   say-hello-workflow:
@@ -29,6 +29,6 @@ workflows:
       - print_hello
       - print_world:
           requires: 
-            - print_hello
-      # - print_name
+            - print_world
+      - print_name
 
