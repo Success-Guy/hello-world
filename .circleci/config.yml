@@ -21,7 +21,7 @@ jobs:
     docker:
       - image: alpine
     steps:
-      - run: "echo << My_Name >>"
+      - run: "echo << My_name >>"
 
 workflows:
   say-hello-workflow:
