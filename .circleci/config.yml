@@ -13,11 +13,13 @@ jobs:
   print_world:
     docker:
       - image: circleci/node:13.8.0
-    steps
+    steps:
       - run: echo " World!"
 
   print_name
-    docker
+    docker:
+      - image: alpine
+    steps:
       - run : echo << My_Name >>
 
 workflows:
