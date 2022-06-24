@@ -11,24 +11,24 @@ jobs:
           name: "Say hello"
           command: "echo Hello"
 
-  print_world:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - run: "echo  World!"
+  # print_world:
+  #   docker:
+  #     - image: circleci/node:13.8.0
+  #   steps:
+  #     - run: "echo  World!"
 
-  print_name:
-    docker:
-      - image: alpine
-    steps:
-      - run: "echo << My_Name >>"
+  # print_name:
+  #   docker:
+  #     - image: alpine
+  #   steps:
+  #     - run: "echo << My_Name >>"
 
 workflows:
   say-hello-workflow:
     jobs:
       - print_hello
-      - print_world:
-        requires: 
-          - print_hello
-      - print_name
+      # - print_world:
+      #   requires: 
+      #     - print_hello
+      # - print_name
 
