@@ -26,13 +26,6 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: cat ~/output.txt
-  use_command:
-    docker:
-      - image: alpine
-    steps:
-      - print_pipeline_id:
-        id: << pipeline.id >>
-
 
   print_hello:
     docker:
@@ -53,6 +46,12 @@ jobs:
       - image: alpine
     steps:
       - run: "echo $MY_NAME"
+  use_command:
+    docker:
+      - image: alpine
+    steps:
+      - print_pipeline_id:
+          id: << pipeline.id >>
 
 workflows:
   say-hello-workflow:
