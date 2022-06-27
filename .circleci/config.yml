@@ -45,8 +45,8 @@ workflows:
     jobs:
       - persist_data
       - use_data:
-        requires:
-          persist_data
+          requires:
+            - persist_data
 
       # - print_hello
       # - print_world:
