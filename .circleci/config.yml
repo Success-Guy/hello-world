@@ -3,32 +3,54 @@
 version: 2.1
 
 jobs:
-  print_hello:
+  persist_data:
     docker:
-      - image: alpine
+      - images: alpine
     steps:
-      - run:
-          name: "Say hello"
-          command: "echo Hello "
+      - run: echo "Hello world!" > ~/output.txt
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - output.txt
+  use_data:
+    docker: apline
+    steps:
+      - attach_workspace:
+        at: ~/
+      - cat ~/output.txt
 
-  print_world:
-    docker:
-      - image: alpine
-    steps:
-      - run: "echo World!"
 
-  print_name:
-    docker:
-      - image: alpine
-    steps:
-      - run: "echo $MY_NAME"
+  # print_hello:
+  #   docker:
+  #     - image: alpine
+  #   steps:
+  #     - run:
+  #         name: "Say hello"
+  #         command: "echo Hello "
+
+  # print_world:
+  #   docker:
+  #     - image: alpine
+  #   steps:
+  #     - run: "echo World!"
+
+  # print_name:
+  #   docker:
+  #     - image: alpine
+  #   steps:
+  #     - run: "echo $MY_NAME"
 
 workflows:
   say-hello-workflow:
     jobs:
-      - print_hello
-      - print_world:
-          requires: 
-            - print_hello
-      - print_name
+      - persist_data
+      - use_data:
+        requires:
+          persist_data
+
+      # - print_hello
+      # - print_world:
+      #     requires: 
+      #       - print_hello
+      # - print_name
 
