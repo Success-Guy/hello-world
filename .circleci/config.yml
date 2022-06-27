@@ -13,7 +13,8 @@ jobs:
           paths:
             - output.txt
   use_data:
-    docker: apline
+    docker:
+      - images: apline
     steps:
       - attach_workspace:
         at: ~/
