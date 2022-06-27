@@ -8,7 +8,7 @@ commands:
       id:
         type: string
     steps:
-      - run echo << parameters.id >>
+      - run: echo << parameters.id >>
 jobs:
   persist_data:
     docker:
