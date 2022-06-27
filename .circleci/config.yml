@@ -18,7 +18,7 @@ jobs:
     steps:
       - attach_workspace:
         at: ~/
-      - cat ~/output.txt
+      - run: cat ~/output.txt
 
 
   # print_hello:
