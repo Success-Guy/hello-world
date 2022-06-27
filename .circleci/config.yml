@@ -2,6 +2,13 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+commands:
+  print_pipeline_id:
+    parameters:
+      id:
+        type: string
+    steps:
+      - run echo << parameters.id >>
 jobs:
   persist_data:
     docker:
@@ -19,39 +26,45 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: cat ~/output.txt
+  use_command:
+    docker:
+      - image: alpine
+    steps:
+      - print_pipeline_id:
+        id: << pipeline.id >>
 
 
-  # print_hello:
-  #   docker:
-  #     - image: alpine
-  #   steps:
-  #     - run:
-  #         name: "Say hello"
-  #         command: "echo Hello "
+  print_hello:
+    docker:
+      - image: alpine
+    steps:
+      - run:
+          name: "Say hello"
+          command: "echo Hello "
 
-  # print_world:
-  #   docker:
-  #     - image: alpine
-  #   steps:
-  #     - run: "echo World!"
+  print_world:
+    docker:
+      - image: alpine
+    steps:
+      - run: "echo World!"
 
-  # print_name:
-  #   docker:
-  #     - image: alpine
-  #   steps:
-  #     - run: "echo $MY_NAME"
+  print_name:
+    docker:
+      - image: alpine
+    steps:
+      - run: "echo $MY_NAME"
 
 workflows:
   say-hello-workflow:
     jobs:
+      - print_hello
+      - print_world:
+          requires: 
+            - print_hello
+      - print_name
       - persist_data
       - use_data:
           requires:
             - persist_data
 
-      # - print_hello
-      # - print_world:
-      #     requires: 
-      #       - print_hello
-      # - print_name
 
