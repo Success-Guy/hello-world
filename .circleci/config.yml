@@ -66,5 +66,6 @@ workflows:
       - use_data:
           requires:
             - persist_data
+      - use_command
 
 
